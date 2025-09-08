@@ -1,6 +1,8 @@
 # s2offerwall_flutter
 
-A new Flutter plugin project.
+A Flutter plugin project for S2Offerwall.
+
+[Developer's guide](https://snapplay.gitbook.io/docs)
 
 ## Getting Started
 
