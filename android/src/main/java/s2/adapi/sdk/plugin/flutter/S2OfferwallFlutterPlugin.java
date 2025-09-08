@@ -1,0 +1,144 @@
+package s2.adapi.sdk.plugin.flutter;
+
+import androidx.annotation.NonNull;
+import android.app.Activity;
+import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
+
+import io.flutter.plugin.common.EventChannel;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.PluginRegistry;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+
+import s2.adapi.sdk.offerwall.S2Offerwall;
+
+public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
+    private MethodChannel methodChannel;
+    private EventChannel eventChannel;
+    private EventChannel.EventSink eventSink;
+
+    private Activity activity;
+
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        methodChannel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "s2offerwall_flutter");
+        methodChannel.setMethodCallHandler(this);
+
+        eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "s2offerwall_flutter/events");
+        eventChannel.setStreamHandler(this);
+
+        registerOfferwallListener();
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        methodChannel.setMethodCallHandler(null);
+        eventChannel.setStreamHandler(null);
+    }
+
+    @Override
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+        this.activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivityForConfigChanges() {
+        activity = null;
+    }
+
+    @Override
+    public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
+        activity = binding.getActivity();
+    }
+
+    @Override
+    public void onDetachedFromActivity() {
+        activity = null;
+    }
+
+    @Override
+    public void onListen(Object arguments, EventChannel.EventSink events) {
+        this.eventSink = events;
+    }
+
+    @Override
+    public void onCancel(Object arguments) {
+        this.eventSink = null;
+    }
+
+    @Override
+    public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        if (activity == null) {
+            Log.e("S2OfferwallPlugin", "Activity is null when " + call.method + " called!");
+            result.error("NO_ACTIVITY", "Activity is not attached", null);
+            return;
+        }
+        
+        if ("showOfferwall".equals(call.method)) {
+            String placementName = call.argument("placementName");
+
+            S2Offerwall.setConsentAgreed(activity, false);
+            S2Offerwall.setConsentDialogRequired(activity, true);
+            S2Offerwall.startActivity(activity, placementName);
+            result.success(null); 
+        }
+        else if ("setAppId".equals(call.method)) {
+            String appId = call.argument("appId");
+            S2Offerwall.setAppId(activity, appId);
+            result.success(null);
+        }
+        else if ("setUserName".equals(call.method)) {
+            String userName = call.argument("userName");
+            S2Offerwall.setUserName(activity, userName);
+            result.success(null);
+        }
+        else if ("getUserName".equals(call.method)) {
+            String userName = S2Offerwall.getUserName(activity);
+            result.success(userName);
+        }
+        else if ("resetUserName".equals(call.method)) {
+            S2Offerwall.resetUserName(activity);
+            result.success(null);
+        }
+        else if ("presentATTPopup".equals(call.method)) {
+            result.success(null);
+        }
+        else if ("getPlatformVersion".equals(call.method)) {
+            result.success("Android " + android.os.Build.VERSION.RELEASE);
+        }
+        else {
+            result.notImplemented();
+        }
+    }
+
+    private void registerOfferwallListener() {
+        S2Offerwall.setEventListener(new S2Offerwall.EventListener() {
+            @Override
+            public void onLoginRequested(String param) {
+                if (eventSink != null) {
+                    Map<String, Object> event = new HashMap<>();
+                    event.put("event", "onLoginRequested");
+                    event.put("param", param);
+                    eventSink.success(event);
+                }
+            }
+
+            @Override
+            public void onCloseRequested(String param) {
+                
+            }
+
+            @Override
+            public void onPermissionRequested(String permission) {
+                
+            }
+        });
+    }
+}
