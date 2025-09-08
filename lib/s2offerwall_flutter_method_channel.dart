@@ -55,6 +55,16 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
     await methodChannel.invokeMethod('setAppId', {"appId": appId});
   }
 
+  @override
+  Future<void> setAppIdForAndroid(String appId) async {
+    await methodChannel.invokeMethod('setAppIdForAndroid', {"appId": appId});
+  }
+
+  @override
+  Future<void> setAppIdForIOS(String appId) async {
+    await methodChannel.invokeMethod('setAppIdForIOS', {"appId": appId});
+  }
+  
   // 로그인 요청 전용 스트림
   @override
   Stream<String> get onLoginRequested {

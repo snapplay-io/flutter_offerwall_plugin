@@ -100,6 +100,7 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             result.success(null);
         }
         else if ("setAppIdForIOS".equals(call.method)) {
+            //Log.d("S2OfferwallPlugin", "setAppIdForIOS called on Android platform : no action taken.");
             result.success(null);
         }
         else if ("setUserName".equals(call.method)) {
