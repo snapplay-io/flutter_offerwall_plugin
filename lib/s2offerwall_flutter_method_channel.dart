@@ -28,6 +28,11 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   Future<void> presentATTPopup() async {
     await methodChannel.invokeMethod('presentATTPopup');
   }
+
+  @override
+  Future<void> setConsentDialogRequired(bool required) async {
+    await methodChannel.invokeMethod('setConsentDialogRequired', {"required": required});
+  }
   
   @override
   Future<void> setUserName(String username) async {

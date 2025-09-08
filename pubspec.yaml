@@ -1,6 +1,8 @@
 name: s2offerwall_flutter
-description: "A new Flutter plugin project."
-homepage:
+description: "A Flutter plugin project for S2Offerwall."
+homepage: "https://snapplay.io"
+repository: https://github.com/snapplay-io/flutter_offerwall_plugin
+issue_tracker: https://github.com/snapplay-io/flutter_offerwall_plugin/issues
 
 version: 1.0.0+1
 

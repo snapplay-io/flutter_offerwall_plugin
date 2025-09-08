@@ -56,6 +56,17 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "INVALID_ARGUMENT", message: "App ID is required", details: nil))
       }
+    case "setAppIdForIOS"
+      if let args = call.arguments as? [String: Any],
+         let appId = args["appId"] as? String {
+        S2Offerwall.setAppId(appId)
+        result(nil)
+      }
+      else {
+        result(FlutterError(code: "INVALID_ARGUMENT", message: "App ID is required", details: nil))
+      }
+    case "setAppIdForAndroid"
+      result(nil)
     case "setUserName":
       if let args = call.arguments as? [String: Any],
          let userName = args["userName"] as? String {
@@ -78,6 +89,15 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       }
       else {
         result(FlutterError(code: "NO_VIEWCONTROLLER", message: "No root view controller", details: nil))
+      }
+    case "setConsentDialogRequired":
+      if let args = call.arguments as? [String: Any],
+         let required = args["required"] as? Bool {
+        //S2Offerwall.setConsentDialogRequired(required)
+        result(nil)
+      }
+      else {
+        result(FlutterError(code: "INVALID_ARGUMENT", message: "Required flag is needed", details: nil))
       }
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)

@@ -22,8 +22,20 @@ class S2OfferwallFlutter {
     return S2OfferwallFlutterPlatform.instance.setAppId(appId);
   }
 
+  static Future<void> setAppIdForAndroid(String appId) {
+    return S2OfferwallFlutterPlatform.instance.setAppIdForAndroid(appId);
+  }
+
+  static Future<void> setAppIdForIOS(String appId) {
+    return S2OfferwallFlutterPlatform.instance.setAppIdForIOS(appId);
+  }
+
   static Future<void> presentATTPopup() {
     return S2OfferwallFlutterPlatform.instance.presentATTPopup();
+  }
+
+  static Future<void> setConsentDialogRequired(bool required) {
+    return S2OfferwallFlutterPlatform.instance.setConsentDialogRequired(required);
   }
   
   static Stream<String> get onLoginRequested {

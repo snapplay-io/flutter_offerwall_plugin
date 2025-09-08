@@ -94,6 +94,14 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             S2Offerwall.setAppId(activity, appId);
             result.success(null);
         }
+        else if ("setAppIdForAndroid".equals(call.method)) {
+            String appId = call.argument("appId");
+            S2Offerwall.setAppId(activity, appId);
+            result.success(null);
+        }
+        else if ("setAppIdForIOS".equals(call.method)) {
+            result.success(null);
+        }
         else if ("setUserName".equals(call.method)) {
             String userName = call.argument("userName");
             S2Offerwall.setUserName(activity, userName);
@@ -108,6 +116,16 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             result.success(null);
         }
         else if ("presentATTPopup".equals(call.method)) {
+            result.success(null);
+        }
+        else if ("setConsentDialogRequired".equals(call.method)) {
+            Boolean required = call.argument("required");
+            S2Offerwall.setConsentDialogRequired(activity, required != null ? required : false);
+            result.success(null);
+        }
+        else if ("setConsentAgreed".equals(call.method)) {
+            Boolean agreed = call.argument("agreed");
+            S2Offerwall.setConsentAgreed(activity, agreed != null ? agreed : false);
             result.success(null);
         }
         else if ("getPlatformVersion".equals(call.method)) {

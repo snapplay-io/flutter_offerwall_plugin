@@ -31,6 +31,10 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('presentATTPopup() has not been implemented.');
   }
 
+  Future<void> setConsentDialogRequired(bool required) {
+    throw UnimplementedError('setConsentDialogRequired() has not been implemented.');
+  }
+  
   Future<void> setUserName(String username) {
     throw UnimplementedError('setUserName() has not been implemented.');
   }
@@ -45,6 +49,14 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
 
   Future<void> setAppId(String appId) {
     throw UnimplementedError('setAppId() has not been implemented.');
+  }
+
+  Future<void> setAppIdForAndroid(String appId) {
+    throw UnimplementedError('setAppIdForAndroid() has not been implemented.');
+  }
+
+  Future<void> setAppIdForIOS(String appId) {
+    throw UnimplementedError('setAppIdForIOS() has not been implemented.');
   }
 
   Stream<String> get onLoginRequested {
