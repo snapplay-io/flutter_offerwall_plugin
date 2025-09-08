@@ -56,7 +56,7 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "INVALID_ARGUMENT", message: "App ID is required", details: nil))
       }
-    case "setAppIdForIOS"
+    case "setAppIdForIOS":
       if let args = call.arguments as? [String: Any],
          let appId = args["appId"] as? String {
         S2Offerwall.setAppId(appId)
@@ -65,7 +65,7 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "INVALID_ARGUMENT", message: "App ID is required", details: nil))
       }
-    case "setAppIdForAndroid"
+    case "setAppIdForAndroid":
       result(nil)
     case "setUserName":
       if let args = call.arguments as? [String: Any],
