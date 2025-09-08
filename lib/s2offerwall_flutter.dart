@@ -1,7 +1,12 @@
 
 import 's2offerwall_flutter_platform_interface.dart';
 
+class S2Offerwall {
+  static const String main = "main";
+}
+
 class S2OfferwallFlutter {
+  
   static Future<void> showOfferwall(String placementName) {
     return S2OfferwallFlutterPlatform.instance.showOfferwall(placementName);
   }
