@@ -1,3 +1,4 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -12,11 +13,16 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   @visibleForTesting
   final EventChannel eventChannel = EventChannel('s2offerwall_flutter/events');
 
-  // 내부에서 모든 이벤트를 공통적으로 수신
-  Stream<Map<String, dynamic>> get events {
-      return eventChannel.receiveBroadcastStream().map((event) {
-        return Map<String, dynamic>.from(event);
-      });
+  // // 내부에서 모든 이벤트를 공통적으로 수신
+  // Stream<Map<String, dynamic>> get events {
+  //     return eventChannel.receiveBroadcastStream().map((event) {
+  //       return Map<String, dynamic>.from(event);
+  //     });
+  // }
+
+  @override
+  Future<void> initSdk() async {
+    await methodChannel.invokeMethod('initSdk');
   }
 
   @override
@@ -64,20 +70,55 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   Future<void> setAppIdForIOS(String appId) async {
     await methodChannel.invokeMethod('setAppIdForIOS', {"appId": appId});
   }
-  
-  // 로그인 요청 전용 스트림
+
   @override
-  Stream<String> get onLoginRequested {
-      return events.where((e) => e["event"] == "onLoginRequested")
-                   .map((e) => e["param"] as String);
+  Future<String> requestOfferwallData(String placementName, bool isEmbeded) async {
+    final result = await methodChannel.invokeMethod<String>('requestOfferwallData',
+                                  {'placementName': placementName,'isEmbeded': isEmbeded});
+    return result ?? '';
   }
 
-  // 권한 요청 전용 스트림
   @override
-  Stream<String> get onPermissionRequested {
-    return events.where((e) => e["event"] == "onPemissionRequested")
-                   .map((e) => e["param"] as String);
+  Future<void> openAdItem(int advId, bool needDetail, String placementFrom) async {
+    await methodChannel.invokeMethod('openAdItem', {
+                                          'advId': advId,
+                                          'needDetail': needDetail,
+                                          'placementFrom': placementFrom
+                                        });
   }
+
+  @override
+  Stream<Map<String, dynamic>> get events {
+      return eventChannel.receiveBroadcastStream().map((event) {
+        return Map<String, dynamic>.from(event);
+      });
+  }
+
+  // // SDK 초기화 완료 전용 스트림
+  // @override
+  // Stream<bool> get onInitCompleted {
+  //   return eventChannel.receiveBroadcastStream("onInitCompleted")
+  //                   .where((e) => e["event"] == "onInitCompleted")
+  //                   .map((e) => e["flag"] == true);
+  // }
+
+  // // 로그인 요청 전용 스트림
+  // @override
+  // Stream<String> get onLoginRequested {
+  //     return eventChannel.receiveBroadcastStream("onLoginRequested")
+  //                       .where((e) => e["event"] == "onLoginRequested")
+  //                       .map((e) => e["param"] as String);
+  // }
+
+  // // 권한 요청 전용 스트림
+  // @override
+  // Stream<String> get onPermissionRequested {
+  //   return eventChannel.receiveBroadcastStream("onPermissionRequested")
+  //                   .where((e) => e["event"] == "onPermissionRequested")
+  //                   .map((e) => e["param"] as String);
+  // }
+
+
 
   @override
   Future<String?> getPlatformVersion() async {

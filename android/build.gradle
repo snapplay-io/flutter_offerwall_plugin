@@ -51,7 +51,7 @@ android {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
 
-        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.9")
+        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.11")
     }
 
     testOptions {

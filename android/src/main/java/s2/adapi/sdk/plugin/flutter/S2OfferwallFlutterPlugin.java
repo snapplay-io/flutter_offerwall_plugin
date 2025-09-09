@@ -3,6 +3,8 @@ package s2.adapi.sdk.plugin.flutter;
 import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -65,11 +67,13 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
 
     @Override
     public void onListen(Object arguments, EventChannel.EventSink events) {
+        Log.e("S2OfferwallPlugin", "EventChannel onListen called " + arguments);
         this.eventSink = events;
     }
 
     @Override
     public void onCancel(Object arguments) {
+        Log.e("S2OfferwallPlugin", "EventChannel onCancel called " + arguments);
         this.eventSink = null;
     }
 
@@ -80,8 +84,38 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             result.error("NO_ACTIVITY", "Activity is not attached", null);
             return;
         }
-        
-        if ("showOfferwall".equals(call.method)) {
+
+        if ("initSdk".equals(call.method)) {
+            S2Offerwall.initSdk(activity, new S2Offerwall.InitializeListener() {
+                @Override
+                public void onSuccess() {
+                    activity.runOnUiThread(() -> {
+                        if (eventSink != null) {
+                            Map<String, Object> event = new HashMap<>();
+                            event.put("event", "onInitCompleted");
+                            event.put("flag", true);
+                            eventSink.success(event);
+                            Log.e("S2OfferwallPlugin", "######################### success ");
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure() {
+                    activity.runOnUiThread(() -> {
+                        if (eventSink != null) {
+                            Map<String, Object> event = new HashMap<>();
+                            event.put("event", "onInitCompleted");
+                            event.put("flag", false);
+                            eventSink.success(event);
+                        }
+                    });
+                }
+            });
+
+            result.success(null);
+        }
+        else if ("showOfferwall".equals(call.method)) {
             String placementName = call.argument("placementName");
 
             S2Offerwall.setConsentAgreed(activity, false);
@@ -129,6 +163,26 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             S2Offerwall.setConsentAgreed(activity, agreed != null ? agreed : false);
             result.success(null);
         }
+        else if ("requestOfferwallData".equals(call.method)) {
+            final String placementName = call.argument("placementName");
+            final Boolean isEmbeded = call.argument("isEmbeded");
+
+            new Thread(() -> {
+                String data = S2Offerwall.requestOfferwallData(activity, placementName, isEmbeded);
+                result.success(data);
+            }).start();
+
+            // String data = S2Offerwall.requestOfferwallData(activity, placementName, isEmbeded);
+            // result.success(data);
+        }
+        else if (call.method.equals("openAdItem")) {
+            Number advId = call.argument("advId");
+            boolean needDetail = call.argument("needDetail");
+            String placementFrom = call.argument("placementFrom");
+
+            S2Offerwall.openAdItem(activity, advId.longValue(), needDetail, placementFrom);
+            result.success(null);
+        } 
         else if ("getPlatformVersion".equals(call.method)) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         }
@@ -141,12 +195,14 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
         S2Offerwall.setEventListener(new S2Offerwall.EventListener() {
             @Override
             public void onLoginRequested(String param) {
-                if (eventSink != null) {
-                    Map<String, Object> event = new HashMap<>();
-                    event.put("event", "onLoginRequested");
-                    event.put("param", param);
-                    eventSink.success(event);
-                }
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (eventSink != null) {
+                        Map<String, Object> event = new HashMap<>();
+                        event.put("event", "onLoginRequested");
+                        event.put("param", param);
+                        eventSink.success(event);
+                    }
+                });
             }
 
             @Override

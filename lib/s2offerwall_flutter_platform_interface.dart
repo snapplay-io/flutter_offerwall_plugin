@@ -23,6 +23,10 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     _instance = instance;
   }
 
+  Future<void> initSdk() {
+    throw UnimplementedError('initSdk() has not been implemented.');
+  }
+
   Future<void> showOfferwall(String placementName) {
     throw UnimplementedError('showOfferwall() has not been implemented.');
   }
@@ -59,6 +63,18 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('setAppIdForIOS() has not been implemented.');
   }
 
+  Future<String> requestOfferwallData(String placementName, bool isEmbeded) {
+    throw UnimplementedError('requestOfferwallData() has not been implemented.');
+  }
+
+  Future<void> openAdItem(int advId, bool needDetail, String placementFrom) {
+    throw UnimplementedError('openAdItem() has not been implemented.');
+  }
+
+  Stream<Map<String, dynamic>> get events {
+    throw UnimplementedError('events() has not been implemented.');
+  }
+
   Stream<String> get onLoginRequested {
     throw UnimplementedError('onLoginRequest() has not been implemented.');
   }
@@ -67,6 +83,9 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('onPermissionRequest() has not been implemented.');
   }
 
+  Stream<bool> get onInitCompleted {
+    throw UnimplementedError('onInitCompleted() has not been implemented.');
+  }
 
 
   Future<String?> getPlatformVersion() {
