@@ -4,3 +4,7 @@
 ## 1.0.4
 * EventListener 버그 수정 및 구조 변경
 * Data API 추가
+## 1.0.5
+* Test code 제거
+## 1.0.6
+* Android SDK (EdgeToEdge) 버전 적용

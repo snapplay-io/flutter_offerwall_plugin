@@ -95,7 +95,6 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
                             event.put("event", "onInitCompleted");
                             event.put("flag", true);
                             eventSink.success(event);
-                            Log.e("S2OfferwallPlugin", "######################### success ");
                         }
                     });
                 }
@@ -117,9 +116,6 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
         }
         else if ("showOfferwall".equals(call.method)) {
             String placementName = call.argument("placementName");
-
-            S2Offerwall.setConsentAgreed(activity, false);
-            S2Offerwall.setConsentDialogRequired(activity, true);
             S2Offerwall.startActivity(activity, placementName);
             result.success(null); 
         }
@@ -171,9 +167,6 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
                 String data = S2Offerwall.requestOfferwallData(activity, placementName, isEmbeded);
                 result.success(data);
             }).start();
-
-            // String data = S2Offerwall.requestOfferwallData(activity, placementName, isEmbeded);
-            // result.success(data);
         }
         else if (call.method.equals("openAdItem")) {
             Number advId = call.argument("advId");
