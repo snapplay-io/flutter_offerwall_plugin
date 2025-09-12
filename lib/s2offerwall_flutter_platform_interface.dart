@@ -71,6 +71,14 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('openAdItem() has not been implemented.');
   }
 
+  Future<void> closeTop() {
+    throw UnimplementedError('closeTop() has not been implemented.');
+  }
+
+  Future<void> closeAll() {
+    throw UnimplementedError('closeAll() has not been implemented.');
+  }
+
   Stream<Map<String, dynamic>> get events {
     throw UnimplementedError('events() has not been implemented.');
   }

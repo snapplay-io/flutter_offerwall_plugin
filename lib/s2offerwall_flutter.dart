@@ -79,6 +79,14 @@ class S2OfferwallFlutter {
     return S2OfferwallFlutterPlatform.instance.openAdItem(advId, needDetail, placementFrom);
   }
 
+  static Future<void> closeTop() {
+    return S2OfferwallFlutterPlatform.instance.closeTop();
+  }
+
+  static Future<void> closeAll() {
+    return S2OfferwallFlutterPlatform.instance.closeAll();
+  }
+  
   // static Stream<String> get onLoginRequested {
   //   return S2OfferwallFlutterPlatform.instance.onLoginRequested;
   // }

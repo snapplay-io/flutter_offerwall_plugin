@@ -88,6 +88,16 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   }
 
   @override
+  Future<void> closeTop() async {
+    await methodChannel.invokeMethod('closeTop');
+  }
+
+  @override
+  Future<void> closeAll() async{
+    await methodChannel.invokeMethod('closeAll');
+  }
+
+  @override
   Stream<Map<String, dynamic>> get events {
       return eventChannel.receiveBroadcastStream().map((event) {
         return Map<String, dynamic>.from(event);

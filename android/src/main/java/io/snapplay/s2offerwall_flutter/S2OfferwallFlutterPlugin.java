@@ -1,4 +1,4 @@
-package s2.adapi.sdk.plugin.flutter;
+package io.snapplay.s2offerwall_flutter;
 
 import androidx.annotation.NonNull;
 import android.app.Activity;
@@ -168,14 +168,22 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
                 result.success(data);
             }).start();
         }
-        else if (call.method.equals("openAdItem")) {
+        else if ("openAdItem".equals(call.method)) {
             Number advId = call.argument("advId");
             boolean needDetail = call.argument("needDetail");
             String placementFrom = call.argument("placementFrom");
 
             S2Offerwall.openAdItem(activity, advId.longValue(), needDetail, placementFrom);
             result.success(null);
-        } 
+        }
+        else if ("closeTop".equals(call.method)) {
+            S2Offerwall.closeTop();
+            result.success(null);
+        }
+        else if ("closeAll".equals(call.method)) {
+            S2Offerwall.closeAll();
+            result.success(null);
+        }
         else if ("getPlatformVersion".equals(call.method)) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         }

@@ -19,10 +19,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     S2OfferwallFlutter.onInitCompleted((success) {
-      if (success is bool && success) {
-        S2OfferwallFlutter.requestOfferwallData("cpu_click", false).then( (data) {
-          print("Offerwall Data: $data");
-        });
+      if (success) {
+        // S2OfferwallFlutter.requestOfferwallData("cpu_click", false).then( (data) {
+        //   print("Offerwall Data: $data");
+        // });
+        print("SDK 초기화 성공");
       } 
       else {
         print("SDK 초기화 실패");
@@ -31,7 +32,10 @@ class _MyAppState extends State<MyApp> {
 
     S2OfferwallFlutter.onLoginRequested((param) {
       print("로그인 이벤트 수신: $param");
-      S2OfferwallFlutter.setUserName("flutter@gmail.com");
+      //S2OfferwallFlutter.setUserName("flutter@gmail.com");
+      S2OfferwallFlutter.closeAll().then((_) {
+        print("Close ALL done!");
+      });
     });
 
     S2OfferwallFlutter.setAppIdForIOS("ebfd98301e2a42f3b2f03af03d938200ac1d89d1702d966dd95d013bbf736253");

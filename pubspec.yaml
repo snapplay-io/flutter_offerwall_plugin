@@ -4,7 +4,7 @@ homepage: "https://snapplay.io"
 repository: https://github.com/snapplay-io/flutter_offerwall_plugin
 issue_tracker: https://github.com/snapplay-io/flutter_offerwall_plugin/issues
 
-version: 1.0.6
+version: 1.0.7
 
 environment:
   sdk: ^3.8.1
@@ -38,7 +38,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: s2.adapi.sdk.plugin.flutter
+        package: io.snapplay.s2offerwall_flutter
         pluginClass: S2OfferwallFlutterPlugin
       ios:
         pluginClass: S2OfferwallFlutterPlugin

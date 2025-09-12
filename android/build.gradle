@@ -39,7 +39,7 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
+        main.java.srcDirs += "src/main/java"
         test.java.srcDirs += "src/test/kotlin"
     }
 
@@ -51,7 +51,7 @@ android {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
 
-        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.13")
+        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.14")
     }
 
     testOptions {

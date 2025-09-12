@@ -8,3 +8,7 @@
 * Test code 제거
 ## 1.0.6
 * Android SDK (EdgeToEdge) 버전 적용
+## 1.0.7
+* 2025.09.12
+* Android Plugin 소스 패키지 변경
+* S2OfferwallFlutter.closeTop(), closeAll() API 추가

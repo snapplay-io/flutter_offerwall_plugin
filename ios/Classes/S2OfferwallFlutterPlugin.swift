@@ -135,6 +135,14 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "NO_VIEWCONTROLLER", message: "No root view controller", details: nil))
       }
+    case "closeTop":
+      S2Offerwall.closeTop() {
+        result(nil)
+      }
+    case "closeAll":
+      S2Offerwall.closeAll() {
+        result(nil)
+      }
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)
     default:
