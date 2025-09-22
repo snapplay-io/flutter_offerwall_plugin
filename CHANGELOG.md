@@ -12,3 +12,7 @@
 * 2025.09.12
 * Android Plugin 소스 패키지 변경
 * S2OfferwallFlutter.closeTop(), closeAll() API 추가
+## 1.0.8
+* 2025.09.22
+* iOS SDK v1.0.15 적용
+
