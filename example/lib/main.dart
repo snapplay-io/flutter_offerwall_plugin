@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
 
     S2OfferwallFlutter.onLoginRequested((param) {
       print("로그인 이벤트 수신: $param");
-      //S2OfferwallFlutter.setUserName("flutter@gmail.com");
+      S2OfferwallFlutter.setUserName("flutter@gmail.com");
       S2OfferwallFlutter.closeAll().then((_) {
         print("Close ALL done!");
       });
