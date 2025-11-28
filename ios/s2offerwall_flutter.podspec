@@ -19,7 +19,7 @@ DESC
   s.dependency 'Flutter'
   s.platform = :ios, '16.0'
 
-  s.dependency 's2offerwall', '~> 1.0.17'
+  s.dependency 's2offerwall', '~> 1.0.18'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
