@@ -41,8 +41,8 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   }
   
   @override
-  Future<void> setUserName(String username) async {
-    await methodChannel.invokeMethod('setUserName', {"userName": username});
+  Future<void> setUserName(String username, [String displayName = ""]) async {
+    await methodChannel.invokeMethod('setUserName', {"userName": username, "displayName": displayName});
   }
 
   @override

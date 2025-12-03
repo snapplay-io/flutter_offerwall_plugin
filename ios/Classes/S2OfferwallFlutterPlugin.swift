@@ -75,8 +75,9 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       result(nil)
     case "setUserName":
       if let args = call.arguments as? [String: Any],
-         let userName = args["userName"] as? String {
-        S2Offerwall.setUserName(userName)
+         let userName = args["userName"] as? String,
+         let displayName = args["displayName"] as? String {
+        S2Offerwall.setUserName(userName, displayName: displayName)
         result(nil)
       } 
       else {

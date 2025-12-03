@@ -39,8 +39,8 @@ class S2OfferwallFlutter {
     return S2OfferwallFlutterPlatform.instance.showOfferwall(placementName);
   }
 
-  static Future<void> setUserName(String username) {
-    return S2OfferwallFlutterPlatform.instance.setUserName(username);
+  static Future<void> setUserName(String username, [String displayName = ""]) {
+    return S2OfferwallFlutterPlatform.instance.setUserName(username, displayName);
   }
 
   static Future<String> getUserName() {

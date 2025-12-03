@@ -39,7 +39,7 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('setConsentDialogRequired() has not been implemented.');
   }
   
-  Future<void> setUserName(String username) {
+  Future<void> setUserName(String username, [String displayName = ""]) {
     throw UnimplementedError('setUserName() has not been implemented.');
   }
 

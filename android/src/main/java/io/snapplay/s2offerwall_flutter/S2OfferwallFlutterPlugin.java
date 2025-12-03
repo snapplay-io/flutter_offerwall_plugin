@@ -135,7 +135,9 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
         }
         else if ("setUserName".equals(call.method)) {
             String userName = call.argument("userName");
-            S2Offerwall.setUserName(activity, userName);
+            String displayName = call.argument("displayName");
+            Log.d("S2OfferwallPlugin", "setUserName called with userName: " + userName + ", displayName: " + displayName);
+            S2Offerwall.setUserName(activity, userName, displayName);
             result.success(null);
         }
         else if ("getUserName".equals(call.method)) {

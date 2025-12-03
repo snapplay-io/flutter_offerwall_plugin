@@ -32,14 +32,14 @@ class _MyAppState extends State<MyApp> {
 
     S2OfferwallFlutter.onLoginRequested((param) {
       print("로그인 이벤트 수신: $param");
-      S2OfferwallFlutter.setUserName("flutter@gmail.com");
-      S2OfferwallFlutter.closeAll().then((_) {
-        print("Close ALL done!");
-      });
+      S2OfferwallFlutter.setUserName("flutter@gmail.com","Flutter 사용자");
+      // S2OfferwallFlutter.closeAll().then((_) {
+      //   print("Close ALL done!");
+      // });
     });
 
-    S2OfferwallFlutter.setAppIdForIOS("ebfd98301e2a42f3b2f03af03d938200ac1d89d1702d966dd95d013bbf736253");
-    S2OfferwallFlutter.setAppIdForAndroid("44df5b010a0766445c0f554f209e5bb9ee7f63e1ce0639238630020aa45ace49");
+    S2OfferwallFlutter.setAppIdForIOS("0d724e96d380f016521e1bba1d9142eae52893d29f484033cb06c3ad0f2ca651");
+    S2OfferwallFlutter.setAppIdForAndroid("0d724e96d380f016521e1bba1d9142eae52893d29f484033cb06c3ad0f2ca651");
 
     S2OfferwallFlutter.initSdk();
 
