@@ -4,10 +4,10 @@ homepage: "https://snapplay.io"
 repository: https://github.com/snapplay-io/flutter_offerwall_plugin
 issue_tracker: https://github.com/snapplay-io/flutter_offerwall_plugin/issues
 
-version: 1.0.16
+version: 1.0.17
 
 environment:
-  sdk: ^3.8.1
+  sdk: '>=3.0.0 <4.0.0'
   flutter: '>=3.3.0'
 
 dependencies:
