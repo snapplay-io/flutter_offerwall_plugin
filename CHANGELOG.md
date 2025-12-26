@@ -41,3 +41,6 @@
 * iOS SDK v1.0.20, Android SDK v1.0.21 적용
 ## 1.0.17
 * flutter sdk 버전 3.0 ~ 4.0 으로 변경
+## 1.0.18
+* 2025.12.26
+* Android SDK v1.0.22 적용
