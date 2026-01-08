@@ -84,7 +84,7 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
         result(FlutterError(code: "INVALID_ARGUMENT", message: "User name is required", details: nil))
       }
     case "getUserName":
-      let userName = S2Offerwall.getUserName() ?? ""
+      let userName = S2Offerwall.getUserName()
       result(userName)
     case "resetUserName":
       S2Offerwall.resetUserName()
@@ -99,7 +99,7 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       }
     case "setConsentDialogRequired":
       if let args = call.arguments as? [String: Any],
-         let required = args["required"] as? Bool {
+         let _ = args["required"] as? Bool {
         //S2Offerwall.setConsentDialogRequired(required)
         result(nil)
       }
