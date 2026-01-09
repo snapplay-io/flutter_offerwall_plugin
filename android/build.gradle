@@ -1,5 +1,5 @@
 group = "io.snapplay.s2offerwall_flutter"
-version = "1.0.20"
+version = "1.0.21"
 
 buildscript {
     ext.kotlin_version = "2.1.0"
@@ -51,7 +51,7 @@ android {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
 
-        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.23")
+        implementation("io.snapplay:s2offerwall-aos-sdk:1.0.24")
     }
 
     testOptions {
