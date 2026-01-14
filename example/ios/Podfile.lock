@@ -3,9 +3,9 @@ PODS:
   - integration_test (0.0.1):
     - Flutter
   - s2offerwall (1.0.22)
-  - s2offerwall_flutter (1.0.10):
+  - s2offerwall_flutter (1.0.21):
     - Flutter
-    - s2offerwall (~> 1.0.20)
+    - s2offerwall (~> 1.0.22)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -29,7 +29,7 @@ SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   s2offerwall: f43ac312cdf58a7717a1aea59a52f067ac0fd7e4
-  s2offerwall_flutter: 97fa7dab3dbb7fe72c791a65c2a0acd9f68ef5c4
+  s2offerwall_flutter: a3b7d82ad3e640109461714538d10261d47ae530
 
 PODFILE CHECKSUM: 749546fab8e6f36d62e17e13874408f2af03ce18
 

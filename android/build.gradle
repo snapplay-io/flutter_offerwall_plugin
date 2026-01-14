@@ -1,5 +1,5 @@
 group = "io.snapplay.s2offerwall_flutter"
-version = "1.0.21"
+version = "1.0.22"
 
 buildscript {
     ext.kotlin_version = "2.1.0"
