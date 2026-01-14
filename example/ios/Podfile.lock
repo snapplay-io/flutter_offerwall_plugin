@@ -26,7 +26,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/s2offerwall_flutter/ios"
 
 SPEC CHECKSUMS:
-  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
   s2offerwall: cc612a4a7254bd4c9c9e2b77138993131aa5fd8f
   s2offerwall_flutter: 975c167061be40e84be4c399ab98475cf558c115
