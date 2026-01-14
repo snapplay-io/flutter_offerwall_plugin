@@ -2,15 +2,15 @@ PODS:
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
-  - s2offerwall (1.0.22)
-  - s2offerwall_flutter (1.0.21):
+  - s2offerwall (1.0.24)
+  - s2offerwall_flutter (1.0.22):
     - Flutter
-    - s2offerwall (~> 1.0.22)
+    - s2offerwall (~> 1.0.24)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
-  - s2offerwall (~> 1.0.22)
+  - s2offerwall (~> 1.0.24)
   - s2offerwall_flutter (from `.symlinks/plugins/s2offerwall_flutter/ios`)
 
 SPEC REPOS:
@@ -28,9 +28,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
-  s2offerwall: f43ac312cdf58a7717a1aea59a52f067ac0fd7e4
-  s2offerwall_flutter: a3b7d82ad3e640109461714538d10261d47ae530
+  s2offerwall: cc612a4a7254bd4c9c9e2b77138993131aa5fd8f
+  s2offerwall_flutter: 975c167061be40e84be4c399ab98475cf558c115
 
-PODFILE CHECKSUM: 749546fab8e6f36d62e17e13874408f2af03ce18
+PODFILE CHECKSUM: 09846f7c9989b8bf7fce4af151c50eddfbd8a088
 
 COCOAPODS: 1.16.2
