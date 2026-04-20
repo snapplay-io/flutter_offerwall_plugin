@@ -72,6 +72,12 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   }
 
   @override
+  Future<String> requestMaxPointData() async {
+    final result = await methodChannel.invokeMethod<String>('requestMaxPointData');
+    return result ?? '';
+  }
+
+  @override
   Future<String> requestOfferwallData(String placementName, bool isEmbeded) async {
     final result = await methodChannel.invokeMethod<String>('requestOfferwallData',
                                   {'placementName': placementName,'isEmbeded': isEmbeded});

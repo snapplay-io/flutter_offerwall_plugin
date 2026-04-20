@@ -20,9 +20,9 @@ class _MyAppState extends State<MyApp> {
 
     S2OfferwallFlutter.onInitCompleted((success) {
       if (success) {
-        // S2OfferwallFlutter.requestOfferwallData("cpu_click", false).then( (data) {
-        //   print("Offerwall Data: $data");
-        // });
+        S2OfferwallFlutter.requestMaxPointData().then( (data) {
+          print("MaxPoint Data: $data");
+        });
         print("SDK 초기화 성공");
       } 
       else {

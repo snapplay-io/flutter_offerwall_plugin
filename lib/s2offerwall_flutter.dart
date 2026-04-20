@@ -70,7 +70,11 @@ class S2OfferwallFlutter {
   static Future<void> setConsentDialogRequired(bool required) {
     return S2OfferwallFlutterPlatform.instance.setConsentDialogRequired(required);
   }
-  
+
+  static Future<String> requestMaxPointData() {
+    return S2OfferwallFlutterPlatform.instance.requestMaxPointData();
+  }
+
   static Future<String> requestOfferwallData(String placementName, bool isEmbeded) {
     return S2OfferwallFlutterPlatform.instance.requestOfferwallData(placementName, isEmbeded);
   }

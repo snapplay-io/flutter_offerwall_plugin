@@ -63,6 +63,10 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('setAppIdForIOS() has not been implemented.');
   }
 
+  Future<String> requestMaxPointData() {
+    throw UnimplementedError('requestMaxPointData() has not been implemented.');
+  }
+
   Future<String> requestOfferwallData(String placementName, bool isEmbeded) {
     throw UnimplementedError('requestOfferwallData() has not been implemented.');
   }
@@ -94,7 +98,6 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
   Stream<bool> get onInitCompleted {
     throw UnimplementedError('onInitCompleted() has not been implemented.');
   }
-
 
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');

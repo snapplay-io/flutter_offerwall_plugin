@@ -161,6 +161,12 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             S2Offerwall.setConsentAgreed(activity, agreed != null ? agreed : false);
             result.success(null);
         }
+        else if ("requestMaxPointData".equals(call.method)) {
+            new Thread(() -> {
+                String data = S2Offerwall.requestMaxPointData(activity);
+                result.success(data);
+            }).start();
+        }
         else if ("requestOfferwallData".equals(call.method)) {
             final String placementName = call.argument("placementName");
             final Boolean isEmbeded = call.argument("isEmbeded");

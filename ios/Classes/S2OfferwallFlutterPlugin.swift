@@ -106,6 +106,11 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "INVALID_ARGUMENT", message: "Required flag is needed", details: nil))
       }
+    case "requestMaxPointData":
+      // Swift SDK 함수 호출
+      S2Offerwall.requestMaxPointData() { data in
+        result(data)  // completion -> Flutter 로 전달
+      }
     case "requestOfferwallData":
       guard let args = call.arguments as? [String: Any],
             let placementName = args["placementName"] as? String else {
