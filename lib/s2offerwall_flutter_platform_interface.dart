@@ -83,6 +83,10 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('closeAll() has not been implemented.');
   }
 
+  Future<void> reportRewardedAdResult(String requestId, String result) {
+    throw UnimplementedError('reportRewardedAdResult() has not been implemented.');
+  }
+
   Stream<Map<String, dynamic>> get events {
     throw UnimplementedError('events() has not been implemented.');
   }

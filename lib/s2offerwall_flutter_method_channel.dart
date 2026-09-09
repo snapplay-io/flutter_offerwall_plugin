@@ -104,6 +104,14 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   }
 
   @override
+  Future<void> reportRewardedAdResult(String requestId, String result) async {
+    await methodChannel.invokeMethod('reportRewardedAdResult', {
+                                          'requestId': requestId,
+                                          'result': result
+                                        });
+  }
+
+  @override
   Stream<Map<String, dynamic>> get events {
       return eventChannel.receiveBroadcastStream().map((event) {
         return Map<String, dynamic>.from(event);

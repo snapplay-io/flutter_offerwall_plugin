@@ -29,7 +29,8 @@ flutter_ios_podfile_setup
 
 target 'Runner' do
   use_frameworks! :linkage => :static 
-  pod 's2offerwall', '~> 1.0.33'
+  # s2offerwall 은 s2offerwall_flutter 플러그인이 의존성으로 가져온다.
+  # 여기에 직접 선언하면 SPM 경로에서 프레임워크가 중복 포함되어 빌드가 깨진다.
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   target 'RunnerTests' do

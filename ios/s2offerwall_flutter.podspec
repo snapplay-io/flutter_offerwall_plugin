@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 's2offerwall_flutter'
-  s.version          = '1.0.33'
+  s.version          = '1.0.34'
   s.summary          = 'A Flutter plugin project for S2Offerwall.'
   s.description      = <<-DESC
 S2Offerwall is a SDK that enables developers to integrate reward ad offers
@@ -15,11 +15,11 @@ DESC
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'devman' => 'devman@snapplay.io' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 's2offerwall_flutter/Sources/s2offerwall_flutter/**/*.swift'
   s.dependency 'Flutter'
   s.platform = :ios, '16.0'
 
-  s.dependency 's2offerwall', '~> 1.0.33'
+  s.dependency 's2offerwall', '~> 1.0.34'
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

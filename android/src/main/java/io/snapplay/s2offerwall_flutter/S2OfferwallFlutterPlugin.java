@@ -20,6 +20,7 @@ import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
 import s2.adapi.sdk.offerwall.S2Offerwall;
+import s2.adapi.sdk.offerwall.S2RewardedAdRequest;
 
 public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, EventChannel.StreamHandler, ActivityAware {
     private MethodChannel methodChannel;
@@ -192,6 +193,14 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             S2Offerwall.closeAll();
             result.success(null);
         }
+        else if ("reportRewardedAdResult".equals(call.method)) {
+            // 앱 RV 결과. Dart 는 네이티브 request 객체를 들 수 없으므로 requestId 로 결과를 알린다.
+            String requestId = call.argument("requestId");
+            String rvResult = call.argument("result");
+
+            S2Offerwall.reportRewardedAdResult(requestId, rvResult);
+            result.success(null);
+        }
         else if ("getPlatformVersion".equals(call.method)) {
             result.success("Android " + android.os.Build.VERSION.RELEASE);
         }
@@ -200,7 +209,49 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
         }
     }
 
+    // 앱 RV 요청을 Dart 로 전달한다.
+    // Dart 는 네이티브 request 객체를 가질 수 없으므로 requestId 문자열만 넘기고,
+    // 결과는 reportRewardedAdResult 메서드 호출로 되돌려 받는다.
+    private void sendRewardedAdEvent(String eventName, S2RewardedAdRequest request) {
+        new Handler(Looper.getMainLooper()).post(() -> {
+            if (eventSink == null) {
+                // Dart 쪽 이벤트 스트림이 아직 연결되지 않았다.
+                // 이벤트 페이지가 타임아웃까지 기다리지 않도록 즉시 응답한다.
+                Log.e("S2OfferwallPlugin", "no event sink. reply to rewarded-ad request. " + eventName);
+                if ("onRewardedAdShow".equals(eventName)) {
+                    request.onDismissed();
+                }
+                else {
+                    request.onNoAd();
+                }
+                return;
+            }
+
+            Map<String, Object> event = new HashMap<>();
+            event.put("event", eventName);
+            event.put("requestId", request.getRequestId());
+            event.put("slot", request.getSlot());
+            eventSink.success(event);
+        });
+    }
+
+    private void registerRewardedAdListener() {
+        S2Offerwall.setRewardedAdListener(new S2Offerwall.RewardedAdListener() {
+            @Override
+            public void onRewardedAdRequested(S2RewardedAdRequest request) {
+                sendRewardedAdEvent("onRewardedAdRequested", request);
+            }
+
+            @Override
+            public void onRewardedAdShow(S2RewardedAdRequest request) {
+                sendRewardedAdEvent("onRewardedAdShow", request);
+            }
+        });
+    }
+
     private void registerOfferwallListener() {
+        registerRewardedAdListener();
+
         S2Offerwall.setEventListener(new S2Offerwall.EventListener() {
             @Override
             public void onLoginRequested(String param) {
