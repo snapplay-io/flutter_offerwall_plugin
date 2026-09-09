@@ -72,3 +72,8 @@
 ## 1.0.34
 * 2026.09.09
 * Android/iOS SDK v1.0.34 적용 (RV 연동 기능 추가)
+## 1.0.35
+* 2026.09.12
+* Android 에서 FlutterEngine 이 두 개 이상 생성되는 경우 (FCM 백그라운드 핸들러 등)
+  앱 RV / 로그인 이벤트가 전달되지 않던 문제 수정
+  (SDK 리스너 등록 시점을 onAttachedToEngine -> onListen 으로 변경)

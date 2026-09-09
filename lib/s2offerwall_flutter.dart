@@ -85,7 +85,10 @@ class S2OfferwallFlutter {
   /// 광고가 준비되면 `request.onLoaded()`, 광고가 없으면 `request.onNoAd()` 를 호출한다.
   /// 등록하지 않으면 이벤트 페이지는 기존처럼 웹 리워드 광고를 사용한다.
   ///
-  /// [initSdk] 보다 먼저 등록해야 한다.
+  /// 콜백은 요청이 도착한 시점에 조회되므로 [initSdk] 앞뒤 어디서 등록해도 동작한다.
+  /// 다만 등록 전에 요청이 도착하면 그 참여 1회는 웹 광고로 폴백되므로
+  /// (크래시나 멈춤은 없지만 조용히 수익만 놓친다),
+  /// 유저가 오퍼월을 열 수 있게 되기 전에 앱 시작 시점에 등록해두는 것이 안전하다.
   static void onRewardedAdRequested(RewardedAdCallback callback) {
     rewardedAdHandlers[_eventRewardedAdRequested] = callback;
   }
@@ -95,7 +98,7 @@ class S2OfferwallFlutter {
   /// 시청이 완료되면 `request.onGranted()`,
   /// 유저가 닫았거나 재생에 실패하면 `request.onDismissed()` 를 호출한다.
   ///
-  /// [initSdk] 보다 먼저 등록해야 한다.
+  /// [onRewardedAdRequested] 와 함께 앱 시작 시점에 등록한다.
   static void onRewardedAdShow(RewardedAdCallback callback) {
     rewardedAdHandlers[_eventRewardedAdShow] = callback;
   }

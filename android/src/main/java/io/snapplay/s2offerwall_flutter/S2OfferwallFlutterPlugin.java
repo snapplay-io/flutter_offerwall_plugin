@@ -37,7 +37,17 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
         eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "s2offerwall_flutter/events");
         eventChannel.setStreamHandler(this);
 
-        registerOfferwallListener();
+        // 여기서 registerOfferwallListener() 를 호출하면 안된다.
+        //
+        // S2Offerwall 의 EventListener / RewardedAdListener 는 static 인데,
+        // 앱에 FlutterEngine 이 두 개 이상 생기면 (FCM 백그라운드 핸들러,
+        // flutter_local_notifications 예약 알림, workmanager 등)
+        // GeneratedPluginRegistrant 가 엔진마다 플러그인을 새로 등록한다.
+        // 그러면 나중에 붙은 인스턴스가 static 리스너를 가져가는데,
+        // 그 인스턴스에는 Dart 구독이 없어 eventSink 가 영구 null 이 되고
+        // 모든 이벤트가 즉시 no-ad 로 응답되어 앱 RV 가 조용히 동작하지 않는다.
+        //
+        // 그래서 Dart 가 실제로 이벤트를 구독한 인스턴스(onListen)에서만 등록한다.
     }
 
     @Override
@@ -70,6 +80,10 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
     public void onListen(Object arguments, EventChannel.EventSink events) {
         Log.e("S2OfferwallPlugin", "EventChannel onListen called " + arguments);
         this.eventSink = events;
+
+        // Dart 구독이 확보된 이 인스턴스가 SDK 리스너를 가져간다.
+        // 여러 FlutterEngine 이 있어도 Dart 가 붙어있는 인스턴스만 여기에 들어온다.
+        registerOfferwallListener();
     }
 
     @Override

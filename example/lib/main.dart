@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
 
   // 이벤트 페이지의 앱 RV 요청을 매체 앱이 처리하도록 콜백을 등록한다.
   // 등록하지 않으면 이벤트 페이지는 기존처럼 웹 리워드 광고를 사용한다.
-  // initSdk() 보다 먼저 등록해야 한다.
+  // 유저가 오퍼월을 열기 전에만 등록되어 있으면 되므로 앱 시작 시점에 등록한다.
   void _initRewardedAd() {
     if (useAdMob) {
       MobileAds.instance.initialize();
