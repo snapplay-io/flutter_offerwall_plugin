@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
 
   // 앱 RV 연동 테스트 모드
   // false 로 두면 광고 없이 더미로 동작하므로 연동 흐름만 먼저 확인할 수 있다.
-  static const bool useAdMob = false;
+  static const bool useAdMob = true;
 
   // 구글이 공개한 테스트용 리워드 광고 단위 ID 이다. 실제 매체 앱은 자신의 광고 단위를 사용한다.
   static final String _rewardedAdUnitId = Platform.isAndroid
@@ -116,8 +116,8 @@ class _MyAppState extends State<MyApp> {
 
       if (!useAdMob) {
         await Future.delayed(const Duration(seconds: 3));
-        //request.onGranted();
-        request.onDismissed();   // 시청 중단 시 버튼이 원복되는지 확인용
+        request.onGranted();
+        //request.onDismissed();   // 시청 중단 시 버튼이 원복되는지 확인용
         return;
       }
 

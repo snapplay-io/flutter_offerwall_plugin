@@ -2,3 +2,11 @@ include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+analyzer:
+  exclude:
+    # 빌드 산출물은 분석 대상이 아니다.
+    # SPM 을 사용하면 의존 패키지의 Dart 소스가 build/ios/SourcePackages 아래에 체크아웃되는데,
+    # 그것까지 분석하면 남의 패키지 오류가 우리 코드의 문제를 덮어버린다.
+    - "build/**"
+    - "**/build/**"

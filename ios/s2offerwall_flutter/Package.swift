@@ -20,7 +20,7 @@ let package = Package(
     dependencies: [
         // Flutter 툴이 빌드 시점에 생성해주는 로컬 패키지이다. (경로 고정)
         .package(name: "FlutterFramework", path: "../FlutterFramework"),
-        .package(url: "https://github.com/snapplay-io/ios_offerwall_sdk.git", from: "1.0.34")
+        .package(url: "https://github.com/snapplay-io/ios_offerwall_sdk.git", from: "1.0.36")
     ],
     targets: [
         .target(
