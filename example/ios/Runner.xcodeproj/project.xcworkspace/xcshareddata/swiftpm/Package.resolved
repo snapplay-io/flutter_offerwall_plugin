@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/snapplay-io/ios_offerwall_sdk.git",
       "state" : {
-        "revision" : "79fba156451ed162518ea11fadc6250ca1aed3f6",
-        "version" : "1.0.36"
+        "revision" : "f076e049d75231df1eeb9eb4c361a410cb1d80b1",
+        "version" : "1.0.37"
       }
     },
     {

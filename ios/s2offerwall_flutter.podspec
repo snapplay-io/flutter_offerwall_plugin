@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 's2offerwall_flutter'
-  s.version          = '1.0.36'
+  s.version          = '1.0.37'
   s.summary          = 'A Flutter plugin project for S2Offerwall.'
   s.description      = <<-DESC
 S2Offerwall is a SDK that enables developers to integrate reward ad offers
