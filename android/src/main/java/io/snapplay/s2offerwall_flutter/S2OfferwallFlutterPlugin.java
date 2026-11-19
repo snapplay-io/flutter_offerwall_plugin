@@ -199,6 +199,11 @@ public class S2OfferwallFlutterPlugin implements FlutterPlugin, MethodChannel.Me
             S2Offerwall.openAdItem(activity, advId.longValue(), needDetail, placementFrom);
             result.success(null);
         }
+        else if ("openHelpdesk".equals(call.method)) {
+            // 고객센터 화면. 결과 코드(0 / 10112 로그인 필요 / 10901 미초기화)를 그대로 Dart 로 돌려준다.
+            String tab = call.argument("tab");
+            result.success(S2Offerwall.openHelpdesk(activity, tab));
+        }
         else if ("closeTop".equals(call.method)) {
             S2Offerwall.closeTop();
             result.success(null);

@@ -94,6 +94,12 @@ class MethodChannelS2OfferwallFlutter extends S2OfferwallFlutterPlatform {
   }
 
   @override
+  Future<int> openHelpdesk(String? tab) async {
+    final ret = await methodChannel.invokeMethod<int>('openHelpdesk', {'tab': tab});
+    return ret ?? 10901;
+  }
+
+  @override
   Future<void> closeTop() async {
     await methodChannel.invokeMethod('closeTop');
   }

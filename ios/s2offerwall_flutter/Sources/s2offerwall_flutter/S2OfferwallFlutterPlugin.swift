@@ -176,6 +176,16 @@ public class S2OfferwallFlutterPlugin: NSObject, FlutterPlugin, FlutterStreamHan
       else {
         result(FlutterError(code: "NO_VIEWCONTROLLER", message: "No root view controller", details: nil))
       }
+    case "openHelpdesk":
+      // 고객센터 화면. 결과 코드(0 / 10112 로그인 필요 / 10901 미초기화)를 그대로 Dart 로 돌려준다.
+      let tab = (call.arguments as? [String: Any])?["tab"] as? String
+
+      if let vc = topViewController() {
+        result(S2Offerwall.openHelpdesk(vc, tab: tab))
+      }
+      else {
+        result(FlutterError(code: "NO_VIEWCONTROLLER", message: "No root view controller", details: nil))
+      }
     case "closeTop":
       S2Offerwall.closeTop() {
         result(nil)

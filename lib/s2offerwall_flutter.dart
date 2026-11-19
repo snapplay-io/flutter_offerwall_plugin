@@ -8,6 +8,13 @@ typedef RewardedAdCallback = void Function(S2RewardedAdRequest request);
 
 class S2Offerwall {
   static const String main = "main";
+
+  /// [S2OfferwallFlutter.openHelpdesk] 결과 코드. 네이티브 SDK(Android/iOS)와 같은 값이다.
+  static const int resultOk = 0;
+  /// setUserName() 으로 사용자 식별값이 설정되지 않아 화면을 띄우지 않았다.
+  static const int resultNeedLogin = 10112;
+  /// initSdk() 전에 호출했다.
+  static const int resultNotInitialized = 10901;
 }
 
 /// 광고 길이 구분
@@ -207,6 +214,18 @@ class S2OfferwallFlutter {
 
   static Future<void> openAdItem(int advId, bool needDetail, String placementFrom) {
     return S2OfferwallFlutterPlatform.instance.openAdItem(advId, needDetail, placementFrom);
+  }
+
+  /// 고객센터(helpdesk) 화면을 팝업으로 띄운다.
+  ///
+  /// 고객센터는 사용자 식별값이 필요하다. [setUserName] 이 호출되지 않았으면 화면을 띄우지 않고
+  /// [S2Offerwall.resultNeedLogin] 을 반환한다. 이 경우 로그인 → [setUserName] 후 다시 호출한다.
+  ///
+  /// [tab] 은 처음 보여줄 탭이다. (소문자 문자열, 연동 가이드 참고) 생략하면 기본 탭을 보여준다.
+  ///
+  /// 반환값 : [S2Offerwall.resultOk], [S2Offerwall.resultNeedLogin], [S2Offerwall.resultNotInitialized]
+  static Future<int> openHelpdesk([String? tab]) {
+    return S2OfferwallFlutterPlatform.instance.openHelpdesk(tab);
   }
 
   static Future<void> closeTop() {

@@ -155,6 +155,43 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  // openHelpdesk 테스트 결과 표시용 (2026.11.19)
+  String _helpdeskResult = "";
+
+  // 고객센터 화면을 띄우고 결과 코드를 화면에 표시한다.
+  // 앱 시작 시 resetUserName() 을 호출하므로 처음에는 resultNeedLogin 이 반환된다.
+  // [로그인] 버튼으로 setUserName() 후 다시 누르면 화면이 뜬다.
+  Future<void> _openHelpdesk(String? tab) async {
+    final ret = await S2OfferwallFlutter.openHelpdesk(tab);
+
+    String desc;
+    switch (ret) {
+      case S2Offerwall.resultOk:
+        desc = "OK";
+        break;
+      case S2Offerwall.resultNeedLogin:
+        desc = "로그인 필요";
+        break;
+      case S2Offerwall.resultNotInitialized:
+        desc = "SDK 미초기화";
+        break;
+      default:
+        desc = "알 수 없음";
+    }
+
+    print("openHelpdesk(tab: $tab) = $ret ($desc)");
+    setState(() {
+      _helpdeskResult = "tab: ${tab ?? '(기본)'} → $ret ($desc)";
+    });
+  }
+
+  Widget _helpdeskButton(String label, String? tab) {
+    return ElevatedButton(
+      onPressed: () => _openHelpdesk(tab),
+      child: Text(label),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -163,20 +200,59 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ElevatedButton(
-                  onPressed: () async {
-                    await S2OfferwallFlutter.showOfferwall("main");
-                    //await S2OfferwallFlutter.openAdItem(292387, true, "cpu_click");
-                    //appState.getNext();
-                  }, 
-                  child: Text('Next'),
-                ),
-              ],
-            ),
-          
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  await S2OfferwallFlutter.showOfferwall("main");
+                  //await S2OfferwallFlutter.openAdItem(292387, true, "cpu_click");
+                  //appState.getNext();
+                },
+                child: Text('Next'),
+              ),
+
+              const SizedBox(height: 30),
+              const Text('openHelpdesk 테스트'),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.center,
+                children: [
+                  _helpdeskButton('기본', null),
+                  _helpdeskButton('적립내역 (p)', 'p'),
+                  _helpdeskButton('참여중 (o)', 'o'),
+                  _helpdeskButton('공지/FAQ (f)', 'f'),
+                  _helpdeskButton('문의하기 (h)', 'h'),
+                  _helpdeskButton('잘못된 값 (x)', 'x'),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                alignment: WrapAlignment.center,
+                children: [
+                  OutlinedButton(
+                    onPressed: () async {
+                      await S2OfferwallFlutter.setUserName("flutter@gmail.com", "Flutter 사용자");
+                      setState(() => _helpdeskResult = "setUserName 완료");
+                    },
+                    child: const Text('로그인'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () async {
+                      await S2OfferwallFlutter.resetUserName();
+                      setState(() => _helpdeskResult = "resetUserName 완료");
+                    },
+                    child: const Text('로그아웃'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(_helpdeskResult),
+            ],
+          ),
         ),
       ),
     );

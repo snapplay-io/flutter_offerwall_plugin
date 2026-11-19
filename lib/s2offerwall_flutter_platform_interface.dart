@@ -75,6 +75,10 @@ abstract class S2OfferwallFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('openAdItem() has not been implemented.');
   }
 
+  Future<int> openHelpdesk(String? tab) {
+    throw UnimplementedError('openHelpdesk() has not been implemented.');
+  }
+
   Future<void> closeTop() {
     throw UnimplementedError('closeTop() has not been implemented.');
   }
